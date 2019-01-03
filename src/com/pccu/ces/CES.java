@@ -19,9 +19,36 @@ public class CES extends Student {
 	private static ArrayList<Student> list ;
 	
 	private static void ReadFile (String filepath) {
-		/*
-		 * Your Work !
-		 * */
+Scanner scanner = null;
+		
+		if (list == null) {
+			list = new ArrayList<Student>();
+		} else {
+			list.removeAll(list);
+		}
+		
+		try {
+			scanner = new Scanner(new File(filepath));
+			while (scanner.hasNext()) {		
+				Student s = new Student();
+               
+				s.setId(scanner.nextInt());	
+				s.setName(scanner.next() );
+				s.setChi(scanner.nextInt());	
+				s.setEng(scanner.nextInt());
+				s.setMath(scanner.nextInt());
+				s.mAvg = scanner.nextFloat();
+			
+				list.add(s);
+		    }
+		
+		} catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+		
+		
 	}
 	
 	private static void WriteFile (ArrayList<Student> list, String filepath) {
